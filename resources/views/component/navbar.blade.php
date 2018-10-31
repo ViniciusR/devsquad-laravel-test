@@ -29,8 +29,17 @@
         </form>
 
         <ul class="navbar-nav mr-auto">
-          @if(!$user)
-            <li><a class="nav-link text-secondary" href="/login">Admin area</a></li>
+          @guest
+            <li class="nav-item">
+                @if (Route::has('login'))
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Admin area') }}</a>
+                @endif
+            </li>
+            <li class="nav-item">
+                @if (Route::has('register'))
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                @endif
+            </li>
           @else
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -46,7 +55,7 @@
                 </form>
               </div>
             </li>
-          @endif
+          @endguest
         </ul>
       </div>
     </div>
