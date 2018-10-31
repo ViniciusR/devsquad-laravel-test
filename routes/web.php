@@ -18,3 +18,5 @@ Route::view('/', 'home');
 Route::resource('/products', 'ProductController');
 
 Auth::routes();
+
+Route::get('/myaccount', 'ProfileController@myaccount')->name('myaccount');
