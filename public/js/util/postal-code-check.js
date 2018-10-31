@@ -36,8 +36,6 @@ $(document).ready(function() {
                 //Consulta o webservice viapostal_code.com.br/
                 $.getJSON("https://viacep.com.br/ws/"+ postal_code +"/json/?callback=?", function(dados) {
 
-                    console.log(dados);
-
                     if (!("erro" in dados)) {
                         //Atualiza os campos com os valores da consulta.
                         $("#address").val(dados.logradouro);

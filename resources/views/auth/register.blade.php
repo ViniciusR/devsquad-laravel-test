@@ -3,12 +3,10 @@
 @section('title', 'Register')
 
 @section('scripts')
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous">
-    </script>
-
-  <script type="text/javascript" src="{{asset('js/util/postal-code-check.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{asset('js/igorescobar/jquery.mask.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/util/masks.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/util/postal-code-check.js')}}"></script>
 @endsection
 
 
