@@ -15,6 +15,15 @@
 	  border-radius: 50%;
 	  display: inline-block;
 	}
+
+	body, wrapper {
+	   min-height:100vh;
+	}
+
+	main {
+	    flex:1;
+	}
+
 </style>
 
 

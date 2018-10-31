@@ -17,11 +17,12 @@
 </head>
 <body>
 
-	@component('component.navbar', ['current' => $current, 'categories' => $categories])
-	@endcomponent
+	<wrapper class="d-flex flex-column">
 
-	<div class="container">
-		<main role="main">
+		@component('component.navbar', ['categories' => $categories])
+		@endcomponent
+
+		<main role="main" class="container mt-3">
 			@hasSection('header_title')
 
 				<div class="pb-2 mt-4 mb-2border-bottom">
@@ -42,15 +43,15 @@
 			@endif
 		</main>
 
-		<div class="fixed-bottom d-flex justify-content-end" style="margin-bottom: 60px; margin-right: 40px;">
-			<div class="circle d-flex justify-content-center align-items-center">
-				<a href="#" class="text-dark"><i class="fa fa-chevron-up fa-2x"></i></a>
-			</div>
-		</div>
-	</div>
+	    <div class="fixed-bottom d-flex justify-content-end" style="margin-bottom: 20px; margin-right: 40px;">
+	      <div class="circle d-flex justify-content-center align-items-center">
+	        <a href="#" class="text-dark"><i class="fa fa-chevron-up fa-2x"></i></a>
+	      </div>
+	    </div>
 
-	@component('component.footer', ['categories' => $categories])
-	@endcomponent
+		@component('component.footer', ['categories' => $categories])
+		@endcomponent
+	</wrapper>
 
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

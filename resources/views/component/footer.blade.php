@@ -1,9 +1,9 @@
-<footer class="pt-4 my-md-5 pt-md-5 border-top bg-dark text-light">
+<footer class="footer pt-4 pt-md-5 border-top bg-dark text-light">
   <div class="container">
     <div class="row">
       <div class="col-12 col-md">
         <p class="d-block mb-3 text-light">A product of</p>
-        <img class="mb-2" src="../../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+        <h3>Vintage</h3>
         <p class="d-block mb-3 text-light">Collection</p>
       </div>
       <div class="col-6 col-md">
