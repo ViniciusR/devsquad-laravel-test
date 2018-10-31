@@ -10,6 +10,17 @@ use App\Category;
 
 class ProductController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +29,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(5);
-        //$products = Product::with('category')->all();
 
         return view('product.index', compact('products'));
     }
@@ -61,9 +71,9 @@ class ProductController extends Controller
      
             if ( !$upload ) {
                 return redirect()
-                            ->back()
-                            ->with('error', 'Upload failrule.')
-                            ->withInput();
+                    ->back()
+                    ->with('error', 'Upload failrule.')
+                    ->withInput();
             }
         }
 
@@ -77,9 +87,9 @@ class ProductController extends Controller
                 ->with('success', 'Product saved successfully!');
         } else {
             return redirect()
-                        ->back()
-                        ->with('error', 'Something went wrong.')
-                        ->withInput();
+                ->back()
+                ->with('error', 'Something went wrong.')
+                ->withInput();
         }
     }
 
@@ -125,9 +135,9 @@ class ProductController extends Controller
      
             if ( !$upload ) {
                 return redirect()
-                            ->back()
-                            ->with('error', 'Upload failrule.')
-                            ->withInput();
+                    ->back()
+                    ->with('error', 'Upload failrule.')
+                    ->withInput();
             }
         }
 
@@ -146,9 +156,9 @@ class ProductController extends Controller
                 ->with('success', 'Product updated successfully!');
         } else {
             return redirect()
-                        ->back()
-                        ->with('error', 'Something went wrong.')
-                        ->withInput();
+                ->back()
+                ->with('error', 'Something went wrong.')
+                ->withInput();
         }
     }
 
@@ -171,9 +181,9 @@ class ProductController extends Controller
                 ->with('success', 'Product deleted successfully!');
         } else {
             return redirect()
-                        ->back()
-                        ->with('error', 'Something went wrong.')
-                        ->withInput();
+                ->back()
+                ->with('error', 'Something went wrong.')
+                ->withInput();
         }
     }
 }

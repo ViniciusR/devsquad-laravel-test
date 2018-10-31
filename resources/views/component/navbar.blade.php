@@ -14,13 +14,34 @@
           @endforeach
         @endif
       </ul>
+
       <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
         <form class="form-inline">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           <a class="nav-link text-secondary" href="#"><i class="fas fa-shopping-cart fa-2x"></i></a>
-          <a class="nav-link text-secondary" href="#">Admin area</a>
         </form>
+
+        <ul class="navbar-nav mr-auto">
+          @if(!$user)
+            <li><a class="nav-link text-secondary" href="/login">Admin area</a></li>
+          @else
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{$user->name}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                 <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+              </div>
+            </li>
+          @endif
+        </ul>
       </div>
     </div>
   </div>

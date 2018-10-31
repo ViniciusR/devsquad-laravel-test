@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use View;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function($view)
         {
             $view->with('categories', \App\Category::all());
+            $view->with('user', Auth::user());
         });
     }
 
