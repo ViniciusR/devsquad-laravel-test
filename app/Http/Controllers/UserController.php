@@ -42,7 +42,7 @@ class UserController extends Controller
     	if ($current_user->id != $id) {
     		return redirect()
                 ->back()
-                ->with('error', 'Wrong user.')
+                ->withErrors('Wrong user.')
                 ->withInput();
     	}
 
@@ -71,7 +71,7 @@ class UserController extends Controller
         } else {
             return redirect()
                 ->back()
-                ->with('error', 'Something went wrong.')
+                ->withErrors('Something went wrong.')
                 ->withInput();
         }
     }

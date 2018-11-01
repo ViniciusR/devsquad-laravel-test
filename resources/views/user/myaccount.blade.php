@@ -13,10 +13,9 @@
 
 @section('header_button')
   <div class="form-inline float-right mt--1 d-none d-md-flex">
-    {!! Form::submit('Save profile', ['class'=>'btn btn-success', 'form' => 'form', 'files' => true]); !!}
+    {!! Form::submit('Save', ['class'=>'btn btn-success', 'form' => 'form', 'files' => true]); !!}
   </div>
 @endsection    
-
 
 @section('content')
 @if ($errors->any())
@@ -182,7 +181,6 @@
              <div class="col-md-6 offset-md-4">
                  <span class="text-danger">* Required fields</span>
              </div>
-
 
             <div class="form-group row mb-0 mt-3">
                 <div class="col-md-6 offset-md-4">
