@@ -37,16 +37,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-    	$current_user = Auth::user();
-
-    	if ($current_user->id != $id) {
+    	if (Auth::user()->id != $id) {
     		return redirect()
                 ->back()
                 ->withErrors('Wrong user.')
                 ->withInput();
     	}
 
-        $validator = $this->validator($request->all());
+        $user = User::find($id);
+        $request_data = $request->all();
+        
+        $validator = $this->validator($request_data);
 
     	if ($validator->fails()) {
     		return redirect()
@@ -54,9 +55,6 @@ class UserController extends Controller
                 ->withErrors($validator)
                 ->withInput();
     	}
-
-        $request_data = $request->all();
-        $user = User::find($id);
 
         if (empty($request->password)) {
         	unset($request_data['password']);

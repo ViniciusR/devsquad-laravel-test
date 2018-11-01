@@ -14,7 +14,7 @@
 
 @section('title', 'Products - New')
 
-@section('header_title', 'Products')
+@section('header_title', 'Product')
 @section('header_subtitle', 'New')
 
 @section('header_button')
@@ -25,7 +25,7 @@
 @endsection            
 
 @section('content')
-  {!! Form::open(['url' => '/products', 'method' => 'post', 'id' => 'form', 'enctype' => 'multipart/form-data']) !!}
+  {!! Form::open(['url' => '/products', 'method' => 'post', 'class' => 'dropzone', 'id' => 'form', 'enctype' => 'multipart/form-data']) !!}
     <div class="card">
       <div class="card-body">
 
@@ -35,26 +35,27 @@
           </div>
         @endif
 
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            {!! Form::file('image', ['class' => 'form-control ' . ($errors->has('image') ? 'is-invalid' : ''), 'required'=> true, 'id' => 'image-input']); !!}
-          
-            @if ($errors->has('image'))
-              <div class="invalid-feedback">
-                {{$errors->first('image') }}
-              </div>
-            @endif
-          </div>
-          <div class="form-group col-md-9">
-            {!! Form::label('name', 'Name'); !!}
-            {!! Form::text('name', null, ['class' => 'form-control ' . ($errors->has('name') ? 'is-invalid' : ''), 'required'=> true, 'placeholder' => 'Name of the product', 'id' => 'name']); !!}
-          
-            @if ($errors->has('name'))
-              <div class="invalid-feedback">
-                {{$errors->first('name') }}
-              </div>
-            @endif
-          </div>
+        <div class="form-group">
+
+          {!! Form::label('image', 'Image'); !!}
+          {!! Form::file('image', ['class' => 'image-input form-control ' . ($errors->has('image') ? 'is-invalid' : ''), 'required'=> true]); !!}
+
+          @if ($errors->has('image'))
+            <div class="invalid-feedback">
+              {{$errors->first('image') }}
+            </div>
+          @endif
+        </div>
+
+        <div class="form-group">
+          {!! Form::label('name', 'Name'); !!}
+          {!! Form::text('name', null, ['class' => 'form-control ' . ($errors->has('name') ? 'is-invalid' : ''), 'required'=> true, 'placeholder' => 'Name of the product', 'id' => 'name']); !!}
+        
+          @if ($errors->has('name'))
+            <div class="invalid-feedback">
+              {{$errors->first('name') }}
+            </div>
+          @endif
         </div>
 
         <div class="form-group">

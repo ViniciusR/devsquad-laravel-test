@@ -14,6 +14,7 @@ class StoreProduct extends FormRequest
      */
     public function authorize()
     {   
+        //Create Policies if there's more than one type of users. Currently there's admin only.
         return $this->user()->isAdmin();
     }
 

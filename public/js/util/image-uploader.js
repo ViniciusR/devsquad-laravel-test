@@ -1,4 +1,4 @@
-$("#image-input").fileinput({
+$(".image-input").fileinput({
 	showCaption: false, 
 	theme: "fas",
 	dropZoneEnabled: false,
