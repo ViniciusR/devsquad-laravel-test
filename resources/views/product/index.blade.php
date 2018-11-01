@@ -58,12 +58,12 @@
                   <td class="text-left">
                     <div class="btn-group" role="group" aria-label="Actions">
                       <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                          @method('DELETE')
-                          @csrf
-                          <div class="form-group">
-                            <?php echo link_to_action('ProductController@edit','Edit', $product->id, ['class' => 'btn btn-primary mr-1']); ?>
-                           {!! Form::button('Delete', ['class' => 'btn btn-danger', 'type' => 'submit', 'onclick' => 'return confirm("Do you really wish to delete this product?")']); !!}
-                          </div>
+                        @method('DELETE')
+                        @csrf
+                        <div class="form-group">
+                          <?php echo link_to_action('ProductController@edit','Edit', $product->id, ['class' => 'btn btn-primary mr-1']); ?>
+                         {!! Form::button('Delete', ['class' => 'btn btn-danger', 'type' => 'submit', 'onclick' => 'return confirm("Do you really wish to delete this product?")']); !!}
+                        </div>
                       </form>
                     </div>
                   </td>

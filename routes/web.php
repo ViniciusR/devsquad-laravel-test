@@ -19,4 +19,5 @@ Route::resource('/products', 'ProductController');
 
 Auth::routes();
 
-Route::get('/myaccount', 'ProfileController@myaccount')->name('myaccount');
+Route::get('/myaccount', 'UserController@myaccount')->name('myaccount');
+Route::put('/user/update/{id}', 'UserController@update')->name('users.update');
