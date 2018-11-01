@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Product;
 
 class StoreProduct extends FormRequest
 {
@@ -12,9 +13,8 @@ class StoreProduct extends FormRequest
      * @return bool
      */
     public function authorize()
-    {
-        //TODO
-        return true;
+    {   
+        return $this->user()->isAdmin();
     }
 
     /**

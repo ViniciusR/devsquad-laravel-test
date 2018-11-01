@@ -20,20 +20,20 @@
 @section('content')
   {!! Form::model($product, array('route' => array('products.update', $product->id), 'id' => 'form', 'method' => 'put', 'enctype' => 'multipart/form-data')); !!}
 
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        Please, verify the error messages and try again.
+      </div>
+    @endif
+
+    @if(session()->has('success'))
+      <div class="alert alert-success">
+        {{ session()->get('success') }}
+      </div>
+    @endif
+
     <div class="card">
       <div class="card-body">
-
-        @if ($errors->any())
-          <div class="alert alert-danger">
-            Please, verify the error messages and try again.
-          </div>
-        @endif
-
-        @if(session()->has('success'))
-          <div class="alert alert-success">
-            {{ session()->get('success') }}
-          </div>
-        @endif
         <div class="form-row">
           <div class="form-group col-md-3">
             <img src="{{asset("storage/products/{$product->image}")}}" class="img-fluid" style="width: 200px; height: auto;">
