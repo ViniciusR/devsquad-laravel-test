@@ -32,8 +32,8 @@ class StoreProduct extends FormRequest
         }
 
         return [
-            'name' => 'required',
-            'description' => 'required',
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
             'price' => 'required',
             'category_id' => 'required',
             'image' => $required_on_update.'|max:10000|mimes:jpeg,jpg,png,gif', //required, max 10000kb, image file',
@@ -50,9 +50,10 @@ class StoreProduct extends FormRequest
         return [
             'name.required' => 'The product name is required',
             'description.required'  => 'The product description is required',
-            'description.price'  => 'The product price is required',
-            'description.category_id'  => 'The product category is required',
+            'price.required'  => 'The product price is required',
+            'category_id.required'  => 'The product category is required',
             'image.mimes'  => 'The file extension is not allowed',
+            'image.required'  => 'The product image is required',
         ];
     }
 }

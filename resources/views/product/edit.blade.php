@@ -13,6 +13,7 @@
 @section('header_button')
   <div class="form-inline float-right mt--1 d-none d-md-flex">
     <?php echo link_to_action('ProductController@index', "Back", null, ["class" => "btn btn-secondary mr-2"]); ?>
+    <?php echo link_to_action('ProductController@show', "Preview", $product->id, ["class" => "btn btn-primary mr-2", "target" => "_blank"]); ?>
     {!! Form::submit('Save product', ['class'=>'btn btn-success', 'form' => 'form', 'files' => true]); !!}
   </div>
 @endsection            

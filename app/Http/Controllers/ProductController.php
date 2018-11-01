@@ -94,6 +94,19 @@ class ProductController extends Controller
     }
 
     /**
+     * Show the resource details.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('product.show', compact('product'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
