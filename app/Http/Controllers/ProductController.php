@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use \Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProduct;
 use App\Product;
 use App\Category;
@@ -72,13 +73,13 @@ class ProductController extends Controller
                 } else {
                     return redirect()
                             ->back()
-                            ->with('error', 'Something went wrong. Please, try again.')
+                            ->withErrors('Something went wrong. Please, try again.')
                             ->withInput();
                 }
             } else {
                 return redirect()
                         ->back()
-                        ->with('error', 'Upload failrule. Please, try again.')
+                        ->withErrors('Upload failrule. Please, try again.')
                         ->withInput();
             }
         }
@@ -152,7 +153,7 @@ class ProductController extends Controller
         } else {
             return redirect()
                     ->back()
-                    ->with('error', 'Something went wrong.')
+                    ->withErrors('Something went wrong.')
                     ->withInput();
         }
     }
@@ -177,7 +178,7 @@ class ProductController extends Controller
         } else {
             return redirect()
                     ->back()
-                    ->with('error', 'Something went wrong.')
+                    ->withErrors('Something went wrong.')
                     ->withInput();
         }
     }
@@ -198,5 +199,68 @@ class ProductController extends Controller
             return $file_name;
 
         return false;
+    }
+
+    /**
+     * Uploads a CSV file.
+     *
+     * @param  \Illuminate\Http\StoreProduct  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadCSV(Request $request)
+    {
+        $validatedData = $request->validate([
+            'csv' => 'required|mimes:csv', //required, max 10000kb, csv file',
+        ]);
+
+        $name = uniqid(date('HisYmd'));
+        $extension = $request->csv->extension();
+        $file_name = "{$name}.{$extension}";
+ 
+        $upload = $request->csv->storeAs('public/csv', $file_name);
+
+        if ($upload)
+            return redirect()
+                    ->route('products.index')
+                    ->with('success', 'Products imported successfully!');
+
+        return redirect()
+                ->route('products.index')
+                ->withErrors('Something went wrong. Please, try again.');
+    }
+
+
+
+    function csvToArray($filename = '', $delimiter = ';')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false)
+        {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+            {
+                if (!$header)
+                    $header = $row;
+                else
+                    $data[] = array_combine($header, $row);
+            }
+            fclose($handle);
+        }
+
+        dd($data);
+
+        return $data;
+    }
+
+    function getFiles() 
+    {
+        $csv_files = Storage::disk('public')->files('csv');
+
+        foreach ($csv_files as $file) {            
+            $this->csvToArray('storage/'.$file, ';');
+        }
     }
 }

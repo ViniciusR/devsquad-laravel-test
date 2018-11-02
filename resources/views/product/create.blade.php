@@ -25,7 +25,7 @@
 @endsection            
 
 @section('content')
-  {!! Form::open(['url' => '/products', 'method' => 'post', 'class' => 'dropzone', 'id' => 'form', 'enctype' => 'multipart/form-data']) !!}
+  {!! Form::open(['url' => '/products', 'method' => 'post', 'id' => 'form', 'enctype' => 'multipart/form-data']) !!}
     <div class="card">
       <div class="card-body">
 

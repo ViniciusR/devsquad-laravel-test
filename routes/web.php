@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 Route::view('/', 'home');
 
+Route::post('/products/uploadCSV', 'ProductController@uploadCSV')->name('products.uploadCSV');
+Route::get('/products/getFiles', 'ProductController@getFiles')->name('products.getFiles');
 Route::resource('/products', 'ProductController');
 
 Auth::routes();
