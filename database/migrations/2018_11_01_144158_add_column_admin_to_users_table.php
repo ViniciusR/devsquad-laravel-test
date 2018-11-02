@@ -14,7 +14,7 @@ class AddColumnAdminToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('admin')->default(false);
+            $table->boolean('admin')->default(true); //True only for testing purposes.
         });
     }
 

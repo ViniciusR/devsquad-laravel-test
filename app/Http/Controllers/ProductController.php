@@ -55,41 +55,32 @@ class ProductController extends Controller
     {
         // Retrieve the validated input data...
         $validated = $request->validated();
-
-        $name_file = null;
  
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
              
-            $name = uniqid(date('HisYmd'));
-     
-            $extension = $request->image->extension();
-     
-            $name_file = "{$name}.{$extension}";
-     
-            $upload = $request->image->storeAs('public/products', $name_file);
-            //storage/app/public/products/name.ext
-     
-            if ( !$upload ) {
+            $image_file_name = null;
+
+            if ($image_file_name = $this->uploadImage($request)) {
+                $request_data = $request->all();
+                $request_data['price'] = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
+                $request_data['image'] = $image_file_name;
+
+                if ($product = Product::create($request_data)) {
+                    return redirect()
+                            ->route('products.edit', ['id' => $product->id])
+                            ->with('success', 'Product saved successfully!');
+                } else {
+                    return redirect()
+                            ->back()
+                            ->with('error', 'Something went wrong. Please, try again.')
+                            ->withInput();
+                }
+            } else {
                 return redirect()
-                    ->back()
-                    ->with('error', 'Upload failrule.')
-                    ->withInput();
+                        ->back()
+                        ->with('error', 'Upload failrule. Please, try again.')
+                        ->withInput();
             }
-        }
-
-        $requestData = $request->all();
-        $requestData['price'] = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
-        $requestData['image'] = $name_file ? $name_file : null;
-
-        if ($product = Product::create($requestData)) {
-            return redirect()
-                ->route('products.edit', ['id' => $product->id])
-                ->with('success', 'Product saved successfully!');
-        } else {
-            return redirect()
-                ->back()
-                ->with('error', 'Something went wrong.')
-                ->withInput();
         }
     }
 
@@ -133,32 +124,23 @@ class ProductController extends Controller
 
         $validated = $request->validated();
         
-        $name_file = null;
- 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
              
-            $name = uniqid(date('HisYmd'));
-     
-            $extension = $request->image->extension();
-     
-            $name_file = "{$name}.{$extension}";
-     
-            $upload = $request->image->storeAs('public/products', $name_file);
-            //storage/app/public/products/name.ext
-     
-            if ( !$upload ) {
+            $image_file_name;
+
+            if (!$image_file_name = $this->uploadImage($request)) {
                 return redirect()
-                    ->back()
-                    ->with('error', 'Upload failrule.')
-                    ->withInput();
+                        ->back()
+                        ->with('error', 'Upload failrule.')
+                        ->withInput();
             }
         }
 
         $requestData = $request->all();
         $requestData['price'] = floatval(str_replace(',', '.', str_replace('.', '', $request->price)));
 
-        if ($name_file) {
-            $requestData['image'] = $name_file;
+        if ($image_file_name) {
+            $requestData['image'] = $image_file_name;
         } else {
           unset($requestData['image']);
         }
@@ -198,5 +180,23 @@ class ProductController extends Controller
                 ->with('error', 'Something went wrong.')
                 ->withInput();
         }
+    }
+
+    /**
+    * Uploads an image from the POST data.
+    * @return the uploaded file name or false if the upload fails.
+    **/
+    protected function uploadImage(Request $request)
+    {
+        $name = uniqid(date('HisYmd'));
+        $extension = $request->image->extension();
+        $file_name = "{$name}.{$extension}";
+ 
+        $upload = $request->image->storeAs('public/products', $file_name);
+
+        if ($upload)
+            return $file_name;
+
+        return false;
     }
 }

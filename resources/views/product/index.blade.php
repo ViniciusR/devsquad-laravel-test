@@ -50,12 +50,12 @@
             @if (isset($products))
               @foreach($products as $product)
                 <tr>
-                  <td class="text-left"><img src="{{asset("storage/products/{$product->image}")}}" class="img-fluid" style="width: 100px; height: auto;"></td>
-                  <td class="text-left">{{$product->name}}</td>
-                  <td class="text-left">{{$product->description}}</td>
-                  <td class="text-left">${{number_format((float)$product->price, 2, '.', '')}}</td>
-                  <td class="text-left">{{$product->category->name}}</td>
-                  <td class="text-left">
+                  <td class="text-left" style="width: 15%"><img src="{{asset("storage/products/{$product->image}")}}" class="img-fluid" style="width: 100px; height: auto;"></td>
+                  <td class="text-left" style="width: 20%">{{$product->name}}</td>
+                  <td class="text-left" style="width: 20%">{{$product->description}}</td>
+                  <td class="text-left" style="width: 15%">${{number_format((float)$product->price, 2, '.', '')}}</td>
+                  <td class="text-left" style="width: 10%"><span class="badge badge-dark">{{$product->category->name}}</span></td>
+                  <td class="text-left" style="width: 15%">
                     <div class="btn-group" role="group" aria-label="Actions">
                       <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                         @method('DELETE')
