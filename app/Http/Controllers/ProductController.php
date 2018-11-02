@@ -147,13 +147,13 @@ class ProductController extends Controller
 
         if ($product->update($requestData)) {
             return redirect()
-                ->route('products.edit', ['id' => $product->id])
-                ->with('success', 'Product updated successfully!');
+                    ->route('products.edit', ['id' => $product->id])
+                    ->with('success', 'Product updated successfully!');
         } else {
             return redirect()
-                ->back()
-                ->with('error', 'Something went wrong.')
-                ->withInput();
+                    ->back()
+                    ->with('error', 'Something went wrong.')
+                    ->withInput();
         }
     }
 
@@ -172,13 +172,13 @@ class ProductController extends Controller
             File::delete('storage/products/' . $image_file_name);
 
             return redirect()
-                ->route('products.index')
-                ->with('success', 'Product deleted successfully!');
+                    ->route('products.index')
+                    ->with('success', 'Product deleted successfully!');
         } else {
             return redirect()
-                ->back()
-                ->with('error', 'Something went wrong.')
-                ->withInput();
+                    ->back()
+                    ->with('error', 'Something went wrong.')
+                    ->withInput();
         }
     }
 
