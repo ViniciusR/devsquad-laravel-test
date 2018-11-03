@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('mystore:importproducts')
-            ->everyFiveMinutes()
-           ->emailOutputTo('vinicius.rodsilva@gmail.com');
+            //->everyFiveMinutes();
+            ->emailOutputTo("admin@email.com");
     }
 
     /**
