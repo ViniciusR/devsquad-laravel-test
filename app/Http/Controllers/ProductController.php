@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use \Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProduct;
 use App\Product;
 use App\Category;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -229,8 +231,6 @@ class ProductController extends Controller
                 ->withErrors('Something went wrong. Please, try again.');
     }
 
-
-
     function csvToArray($filename = '', $delimiter = ';')
     {
         if (!file_exists($filename) || !is_readable($filename))
@@ -238,29 +238,49 @@ class ProductController extends Controller
 
         $header = null;
         $data = array();
+
         if (($handle = fopen($filename, 'r')) !== false)
         {
             while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
             {
                 if (!$header)
-                    $header = $row;
-                else
+                    $header = preg_replace("/[^\w\d]/","", $row);
+                else 
                     $data[] = array_combine($header, $row);
             }
             fclose($handle);
         }
 
-        dd($data);
-
         return $data;
+    }
+
+    public function importCsvToDatabase($csv_file)
+    {
+        $products_data = $this->csvToArray($csv_file, ';');
+
+        $data_insert = array();
+
+        for ($i = 0; $i < count($products_data); $i++) {
+            $data_insert[] = [
+                'name' => $products_data[$i]['name'],
+                'description' => $products_data[$i]['description'],
+                'image' => $products_data[$i]['image'],
+                'price' => $products_data[$i]['price'],
+                'category_id' => $products_data[$i]['category_id'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+        }
+
+        return DB::table('products')->insert($data_insert);
     }
 
     function getFiles() 
     {
         $csv_files = Storage::disk('public')->files('csv');
 
-        foreach ($csv_files as $file) {            
-            $this->csvToArray('storage/'.$file, ';');
+        foreach ($csv_files as $file) {     
+            $this->importCsvToDatabase('storage/'.$file);      
         }
     }
 }
