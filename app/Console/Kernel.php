@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\ImportProducts::class,
+        'App\Console\Commands\ImportProducts'
     ];
 
     /**
@@ -24,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(ImportProducts::class, ['--force'])
-            ->everyFiveMinutes();
+        $schedule->command('mystore:importproducts')
+            ->everyFiveMinutes()
+           ->emailOutputTo('vinicius.rodsilva@gmail.com');
     }
 
     /**

@@ -99,7 +99,8 @@ class ImportProducts extends Command
 
         foreach ($csv_files as $file) {     
 
-            if (!$this->importCsvToDatabase('storage/'.$file)) 
+            //if (!$this->importCsvToDatabase('public/storage/'.$file)) 
+            if (!$this->importCsvToDatabase('public/storage/'.$file)) 
                 $success = false;      
         }
 
