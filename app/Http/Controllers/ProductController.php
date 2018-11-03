@@ -127,10 +127,10 @@ class ProductController extends Controller
 
         $validated = $request->validated();
         
+        $image_file_name = null;
+
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
              
-            $image_file_name;
-
             if (!$image_file_name = $this->uploadImage($request)) {
                 return redirect()
                         ->back()
