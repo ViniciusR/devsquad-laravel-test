@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('mystore:importproducts')
-            //->everyFiveMinutes();
+            ->everyFiveMinutes()
+            //We should retrieve the email address of the logged user or find the admin user.
+            //But it's fixed for testing only.
             ->emailOutputTo("admin@email.com");
     }
 

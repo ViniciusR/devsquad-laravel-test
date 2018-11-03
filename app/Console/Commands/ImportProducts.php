@@ -98,9 +98,11 @@ class ImportProducts extends Command
         $csv_files = Storage::disk('public')->files('csv');
 
         foreach ($csv_files as $file) {     
-            
+
             if (!$this->importCsvToDatabase('public/storage/'.$file)) 
-                $success = false;      
+                $success = false;
+            else 
+                Storage::disk('public')->move($file,'csv/imported/'.basename($file));    
         }
 
         return $success;
