@@ -19,6 +19,10 @@
 
 	<wrapper class="d-flex flex-column">
 
+		@hasSection('topbar')
+			@yield('topbar')
+		@endif
+
 		@component('component.navbar', ['categories' => $categories])
 		@endcomponent
 

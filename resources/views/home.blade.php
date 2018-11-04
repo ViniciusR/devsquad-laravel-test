@@ -48,15 +48,24 @@
    margin-bottom:50px;
 }
 
+.topbar {
+  background: black;
+}
+
 </style>
 
 @extends('layout.base', ['current' => 'home'])
 
 @section('title', 'Home')
 
-@section('content')
+@section('topbar')
+  <div class="topbar text-center pt-2">
+    <h5 class="text-light"><strong>Free shipping<strong></h5>
+  </div>
+@endsection
 
-        
+@section('content')
+  
   <div class="position-relative overflow-hidden p-3 pt-md-5 pb-md-5 mt-md-5 mb-md-2 text-left bg-light page-header text-light">
     <div class="p-lg-5 my-5">
       <h1 class="display-4 font-weight-normal mt-4 ml-5">Vintage Watches</h1>
@@ -64,10 +73,9 @@
     </div>
   </div>
 
-
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">FEATURED</h1>
-    <h3>For woman</h3>
+    <h3>For man</h3>
   </div>
 
   <div class="container">
@@ -77,6 +85,56 @@
       <ol class="carousel-indicators">
         @for ($i = 0; $i < ceil($products->count() / 3); $i++)
           <li data-target="#myCarousel" data-slide-to="{{$i}}" @if ($i == 0) class="active" @else class="" @endif></li>
+        @endfor
+      </ol>
+      <div class="carousel-inner">
+
+        <?php $offset = 0; ?>
+
+        @for ($page = 0; $page < ceil($products->count() / 3); $page++)
+          <div @if ($page == 0) class="carousel-item active" @else class="carousel-item" @endif>
+            <div class="row text-center mb-5">
+              @for ($k = $offset; $k < ($products->count() < $offset+3 ? $products->count() : $offset+3); $k++)
+                <div class="col-md-4 mt-4">
+                  <div class="card" style="border: none;">
+                    <img class="card-img-top img-fluid" src="{{asset("storage/products/{$products[$k]->image}")}}" data-holder-rendered="true" style="height: 350px; width: auto; display: block;">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-6">
+                          <h5 class="card-title text-left">{{$products[$k]->name}}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="card-title pricing-card-title text-right"><strong>${{number_format((float)$products[$k]->price, 2, '.', '')}}</strong></h4>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-dark btn-lg mb-1 mt-3">
+                        Add to cart
+                      </button>  
+                    </div>
+                  </div>
+                </div>
+              @endfor
+            </div>
+          </div>
+          <?php $offset += $page+3; ?>
+        @endfor
+
+      </div>
+    </div>
+  @endif
+
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">FEATURED</h1>
+    <h3>For woman</h3>
+  </div>
+
+  <div class="container">
+
+      @if (isset($products))
+    <div id="myCarousel2" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        @for ($i = 0; $i < ceil($products->count() / 3); $i++)
+          <li data-target="#myCarousel2" data-slide-to="{{$i}}" @if ($i == 0) class="active" @else class="" @endif></li>
         @endfor
       </ol>
       <div class="carousel-inner">
