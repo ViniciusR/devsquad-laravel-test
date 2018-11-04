@@ -52,6 +52,13 @@
   background: black;
 }
 
+.diagonal-split-background{
+  background-color: #013A6B;
+  background-image: -webkit-linear-gradient(66deg, #FFF 50%, #000 50%);
+  height: 500px; width: auto;
+  padding: 15px;
+}
+
 </style>
 
 @extends('layout.base', ['current' => 'home'])
@@ -73,14 +80,12 @@
     </div>
   </div>
 
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-uppercase">
-    <h1 class="display-4 text-uppercase">Featured</h1>
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-uppercase diagonal-split-background text-light" style="height: 500px; width: auto;">
+    <h1 class="display-4">Featured</h1>
     <h3>For man</h3>
   </div>
 
-  <div class="container">
-
-      @if (isset($products))
+  @if (isset($products))
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         @for ($i = 0; $i < ceil($products->count() / 3); $i++)
@@ -88,7 +93,6 @@
         @endfor
       </ol>
       <div class="carousel-inner">
-
         <?php $offset = 0; ?>
 
         @for ($page = 0; $page < ceil($products->count() / 3); $page++)
@@ -122,66 +126,63 @@
     </div>
   @endif
 
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4 text-uppercase">Featured</h1>
-    <h3 class="text-uppercase">For woman</h3>
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-uppercase diagonal-split-background text-light" style="height: 500px; width: auto;">
+    <h1 class="display-4">Featured</h1>
+    <h3>For woman</h3>
   </div>
 
-  <div class="container">
+  @if (isset($products))
+    <div id="myCarousel2" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        @for ($i = 0; $i < ceil($products->count() / 3); $i++)
+          <li data-target="#myCarousel2" data-slide-to="{{$i}}" @if ($i == 0) class="active" @else class="" @endif></li>
+        @endfor
+      </ol>
 
-      @if (isset($products))
-        <div id="myCarousel2" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            @for ($i = 0; $i < ceil($products->count() / 3); $i++)
-              <li data-target="#myCarousel2" data-slide-to="{{$i}}" @if ($i == 0) class="active" @else class="" @endif></li>
-            @endfor
-          </ol>
-          <div class="carousel-inner">
+      <div class="carousel-inner">
+      <?php $offset = 0; ?>
 
-            <?php $offset = 0; ?>
-
-            @for ($page = 0; $page < ceil($products->count() / 3); $page++)
-              <div @if ($page == 0) class="carousel-item active" @else class="carousel-item" @endif>
-                <div class="row text-center mb-5">
-                  @for ($k = $offset; $k < ($products->count() < $offset+3 ? $products->count() : $offset+3); $k++)
-                    <div class="col-md-4 mt-4">
-                      <div class="card" style="border: none;">
-                        <img class="card-img-top img-fluid" src="{{asset("storage/products/{$products[$k]->image}")}}" data-holder-rendered="true" style="height: 350px; width: auto; display: block;">
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-6">
-                              <h5 class="card-title text-left">{{$products[$k]->name}}</h5>
-                            </div>
-                            <div class="col-6">
-                                <h4 class="card-title pricing-card-title text-right"><strong>${{number_format((float)$products[$k]->price, 2, '.', '')}}</strong></h4>
-                            </div>
-                          </div>
-                          <button type="button" class="btn btn-dark btn-lg mb-1 mt-3 text-uppercase">
-                            Add to cart
-                          </button>  
+        @for ($page = 0; $page < ceil($products->count() / 3); $page++)
+          <div @if ($page == 0) class="carousel-item active" @else class="carousel-item" @endif>
+            <div class="row text-center mb-5">
+              @for ($k = $offset; $k < ($products->count() < $offset+3 ? $products->count() : $offset+3); $k++)
+                <div class="col-md-4 mt-4">
+                  <div class="card" style="border: none;">
+                    <img class="card-img-top img-fluid" src="{{asset("storage/products/{$products[$k]->image}")}}" data-holder-rendered="true" style="height: 350px; width: auto; display: block;">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-6">
+                          <h5 class="card-title text-left">{{$products[$k]->name}}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="card-title pricing-card-title text-right"><strong>${{number_format((float)$products[$k]->price, 2, '.', '')}}</strong></h4>
                         </div>
                       </div>
+                      <button type="button" class="btn btn-dark btn-lg mb-1 mt-3 text-uppercase">
+                        Add to cart
+                      </button>  
                     </div>
-                  @endfor
+                  </div>
                 </div>
-              </div>
-              <?php $offset += $page+3; ?>
-            @endfor
+              @endfor
+            </div>
           </div>
-        </div>
-      @endif
-    </div>
-
-    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center mb-3 text-uppercase">
-      <h1 class="display-4">Want 80% off?</h1>
-      <p class="h2 mb-3">Subscribe below to get</p>
-      <div class="form-group text-center">
-        <input type="email" class="form-control input-lg text-uppercase" style="margin:auto; width: 300px;" placeholder="Email">
+          <?php $offset += $page+3; ?>
+        @endfor
       </div>
-      <button type="button" class="btn btn-dark btn-lg mb-1 mt-3 text-uppercase">
-        Subscribe
-      </button>  
     </div>
+  @endif
+
+  <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center mb-3 text-uppercase">
+    <h1 class="display-4">Want 80% off?</h1>
+    <p class="h2 mb-3">Subscribe below to get</p>
+    <div class="form-group text-center">
+      <input type="email" class="form-control input-lg text-uppercase" style="margin:auto; width: 300px;" placeholder="Email">
+    </div>
+    <button type="button" class="btn btn-dark btn-lg mb-1 mt-3 text-uppercase">
+      Subscribe
+    </button>  
+  </div>
 
   </div> <!-- /container -->
 @endsection
