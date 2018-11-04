@@ -13,7 +13,7 @@
 
 use Illuminate\Http\Request;
 
-Route::view('/', 'home');
+Route::get('/', 'HomeController@home');
 
 Route::post('/products/uploadCSV', 'ProductController@uploadCSV')->name('products.uploadCSV');
 Route::resource('/products', 'ProductController');
