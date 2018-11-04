@@ -101,11 +101,15 @@
               @for ($k = $offset; $k < ($products->count() < $offset+3 ? $products->count() : $offset+3); $k++)
                 <div class="col-md-4 mt-4">
                   <div class="card" style="border: none;">
-                    <img class="card-img-top img-fluid" src="{{asset("storage/products/{$products[$k]->image}")}}" data-holder-rendered="true" style="height: 350px; width: auto; display: block;">
+                    <a href="products/{{$products[$k]->id}}">
+                      <img class="card-img-top img-fluid" src="{{asset("storage/products/{$products[$k]->image}")}}" data-holder-rendered="true" style="height: 350px; width: auto; display: block;">
+                    </a>
                     <div class="card-body">
                       <div class="row">
                         <div class="col-6">
-                          <h5 class="card-title text-left">{{$products[$k]->name}}</h5>
+                          <a href="products/{{$products[$k]->id}}" class="text-dark">
+                            <h5 class="card-title text-left">{{$products[$k]->name}}</h5>
+                          </a>
                         </div>
                         <div class="col-6">
                             <h4 class="card-title pricing-card-title text-right"><strong>${{number_format((float)$products[$k]->price, 2, '.', '')}}</strong></h4>
@@ -148,11 +152,15 @@
               @for ($k = $offset; $k < ($products->count() < $offset+3 ? $products->count() : $offset+3); $k++)
                 <div class="col-md-4 mt-4">
                   <div class="card" style="border: none;">
-                    <img class="card-img-top img-fluid" src="{{asset("storage/products/{$products[$k]->image}")}}" data-holder-rendered="true" style="height: 350px; width: auto; display: block;">
+                    <a href="products/{{$products[$k]->id}}">
+                      <img class="card-img-top img-fluid" src="{{asset("storage/products/{$products[$k]->image}")}}" data-holder-rendered="true" style="height: 350px; width: auto; display: block;">
+                    </a>
                     <div class="card-body">
                       <div class="row">
                         <div class="col-6">
-                          <h5 class="card-title text-left">{{$products[$k]->name}}</h5>
+                          <a href="products/{{$products[$k]->id}}" class="text-dark">
+                            <h5 class="card-title text-left">{{$products[$k]->name}}</h5>
+                          </a>
                         </div>
                         <div class="col-6">
                             <h4 class="card-title pricing-card-title text-right"><strong>${{number_format((float)$products[$k]->price, 2, '.', '')}}</strong></h4>
