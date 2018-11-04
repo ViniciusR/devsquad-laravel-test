@@ -60,7 +60,7 @@
 
 @section('topbar')
   <div class="topbar text-center pt-2">
-    <h5 class="text-light"><strong>Free shipping<strong></h5>
+    <h5 class="text-light text-uppercase"><strong>Free shipping<strong></h5>
   </div>
 @endsection
 
@@ -73,8 +73,8 @@
     </div>
   </div>
 
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">FEATURED</h1>
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-uppercase">
+    <h1 class="display-4 text-uppercase">Featured</h1>
     <h3>For man</h3>
   </div>
 
@@ -107,7 +107,7 @@
                             <h4 class="card-title pricing-card-title text-right"><strong>${{number_format((float)$products[$k]->price, 2, '.', '')}}</strong></h4>
                         </div>
                       </div>
-                      <button type="button" class="btn btn-dark btn-lg mb-1 mt-3">
+                      <button type="button" class="btn btn-dark btn-lg mb-1 mt-3 text-uppercase">
                         Add to cart
                       </button>  
                     </div>
@@ -123,8 +123,8 @@
   @endif
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">FEATURED</h1>
-    <h3>For woman</h3>
+    <h1 class="display-4 text-uppercase">Featured</h1>
+    <h3 class="text-uppercase">For woman</h3>
   </div>
 
   <div class="container">
@@ -156,7 +156,7 @@
                                 <h4 class="card-title pricing-card-title text-right"><strong>${{number_format((float)$products[$k]->price, 2, '.', '')}}</strong></h4>
                             </div>
                           </div>
-                          <button type="button" class="btn btn-dark btn-lg mb-1 mt-3">
+                          <button type="button" class="btn btn-dark btn-lg mb-1 mt-3 text-uppercase">
                             Add to cart
                           </button>  
                         </div>
@@ -172,13 +172,13 @@
       @endif
     </div>
 
-    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center mb-3">
+    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center mb-3 text-uppercase">
       <h1 class="display-4">Want 80% off?</h1>
       <p class="h2 mb-3">Subscribe below to get</p>
       <div class="form-group text-center">
-        <input type="email" class="form-control input-lg" style="margin:auto; width: 300px;" placeholder="Email">
+        <input type="email" class="form-control input-lg text-uppercase" style="margin:auto; width: 300px;" placeholder="Email">
       </div>
-      <button type="button" class="btn btn-dark btn-lg mb-1 mt-3">
+      <button type="button" class="btn btn-dark btn-lg mb-1 mt-3 text-uppercase">
         Subscribe
       </button>  
     </div>

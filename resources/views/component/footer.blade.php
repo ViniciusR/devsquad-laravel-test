@@ -1,4 +1,4 @@
-<footer class="footer pt-4 pt-md-5 border-top bg-dark text-light">
+<footer class="footer pt-4 pt-md-5 border-top bg-dark text-light text-uppercase">
   <div class="container">
     <div class="row">
       <div class="col-12 col-md">
@@ -46,10 +46,10 @@
     </div>
     <div class="row">
       <div class="col-9 col-md-9">
-        <p>support@vincerowatches.com</p>
+        <p><small>support@vincerowatches.com</small></p>
       </div>
       <div class="col-3 col-md-3">
-        <p>2018 Vintage - All rights reserved.</p>
+        <p><small>2018 Vintage - All rights reserved.</small></p>
       </div>
     </div>
   </div>
