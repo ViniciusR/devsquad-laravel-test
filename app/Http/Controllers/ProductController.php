@@ -31,7 +31,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(5);
+        $products = Product::orderBy('created_at', 'asc')
+            ->paginate(5);
 
         return view('product.index', compact('products'));
     }
