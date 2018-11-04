@@ -47,6 +47,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                  <a class="dropdown-item text-uppercase" href="{{ route('myaccount') }}">My account</a>
+                 <a class="dropdown-item text-uppercase" href="/products">Products</a>
                  <div class="dropdown-divider"></div>
                  <a class="dropdown-item text-uppercase" href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
